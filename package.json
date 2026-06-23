@@ -1,7 +1,6 @@
 {
   "name": "campanha-2dprint",
   "version": "1.0.0",
-  "description": "Painel e site dinâmico para produtos eleitorais 2D Print",
   "main": "app.js",
   "scripts": {
     "start": "node app.js"
