@@ -1,27 +1,47 @@
-!DOCTYPE html
-html lang=pt-BR
-head
-  meta charset=UTF-8
-  meta name=viewport content=width=device-width, initial-scale=1.0
-  titleCampanha Eleitoral 2D Printtitle
-head
-body
-  h1Produtos Eleitoraish1
-  div id=produtosdiv
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2D Print - Produtos</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="img/logo.png" alt="2D Print">
+    </div>
+    <nav>
+      <a href="login.html">Painel Administrativo</a>
+    </nav>
+  </header>
 
-  script
-    fetch('apiprodutos')
-      .then(res = res.json())
-      .then(produtos = {
-        const container = document.getElementById('produtos');
-        container.innerHTML = produtos.map(p = `
-          div style=border1px solid #ccc; padding10px; margin10px;
-            h3${p.nome}h3
-            p${p.descricao}p
-            pbQtd mínimab ${p.quantidade_minima}p
-          div
-        `).join('');
-      });
-  script
-body
-html
+  <main>
+    <h2>Produtos Disponíveis</h2>
+    <div id="listaProdutos"></div>
+  </main>
+
+  <footer>
+    <p>© 2026 2D Print - Todos os direitos reservados</p>
+    <p>Contato: <a href="mailto:contato@2dprint.com.br">contato@2dprint.com.br</a></p>
+  </footer>
+
+  <script>
+    async function carregarProdutos() {
+      const res = await fetch('/api/produtos');
+      const produtos = await res.json();
+      const lista = document.getElementById('listaProdutos');
+      lista.innerHTML = produtos.map(p => `
+        <div class="produto">
+          <img src="${p.imagem}" alt="${p.nome}" style="max-width:150px">
+          <h3>${p.nome}</h3>
+          <p>${p.descricao}</p>
+          <p><b>Preço:</b> R$ ${p.preco.toFixed(2)}</p>
+          <button>Adquirir</button>
+        </div>
+      `).join('');
+    }
+    carregarProdutos();
+  </script>
+</body>
+</html>
