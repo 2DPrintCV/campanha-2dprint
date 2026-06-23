@@ -1,14 +1,26 @@
 // Importa dependências
 const express = require('express');
 const sqlite3 = require('sqlite3').verbose();
+const path = require('path');
 const app = express();
 
 // Configurações básicas
 app.use(express.json());
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Conexão com o banco de dados
-const db = new sqlite3.Database('./produtos.db');
+const db = new sqlite3.Database('./produtos.db', (err) => {
+  if (err) {
+    console.error('Erro ao conectar ao banco de dados:', err);
+  } else {
+    console.log('Conectado ao banco de dados SQLite.');
+  }
+});
+
+// 🔹 Rota principal (renderiza o site)
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
 
 // 🔹 Rota para listar produtos ativos
 app.get('/api/produtos', (req, res) => {
@@ -50,4 +62,4 @@ app.put('/api/produtos/:id/status', (req, res) => {
 });
 
 // 🔹 Inicializa o servidor
-app.listen(3000, () => console.log('Servidor rodando na porta 3000'));
+app.listen(3000, () => console.log('Servidor rodando na porta 300
