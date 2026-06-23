@@ -62,4 +62,4 @@ app.put('/api/produtos/:id/status', (req, res) => {
 });
 
 // 🔹 Inicializa o servidor
-app.listen(3000, () => console.log('Servidor rodando na porta 300
+app.listen(3000, () => console.log('Servidor rodando na porta 3000'));
