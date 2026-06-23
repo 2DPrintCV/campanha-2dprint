@@ -1,0 +1,13 @@
+{
+  "name": "campanha-2dprint",
+  "version": "1.0.0",
+  "description": "Painel e site dinâmico para produtos eleitorais 2D Print",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "sqlite3": "^5.1.6"
+  }
+}
